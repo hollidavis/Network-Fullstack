@@ -10,7 +10,7 @@
     <!-- Creator Info -->
     <div class="row">
       <!-- Profile Picture -->
-      <div class="ml-3 cursor" @click.stop="getProfileById">
+      <div class="ms-3 cursor" @click.stop="getProfileById">
         <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
       </div>
       <!-- Name, Created At, Graduated -->
@@ -22,8 +22,8 @@
           <p class="m-0">
             {{ state.time }}
           </p>
-          <span class="ml-2 fa fa-user-graduate" aria-hidden="true" v-if="post.creator.graduated == true"></span>
-          <span class="ml-2 fa fa-user" aria-hidden="true" v-else></span>
+          <span class="ms-2 fa fa-user-graduate" aria-hidden="true" v-if="post.creator.graduated == true"></span>
+          <span class="ms-2 fa fa-user" aria-hidden="true" v-else></span>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
 import { computed, onMounted, onUpdated, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 import { profilesService } from '../services/ProfilesService'
 import { router } from '../router'
 export default {

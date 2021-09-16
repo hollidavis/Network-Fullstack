@@ -16,7 +16,7 @@
 import { computed, onMounted, onUpdated } from 'vue'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 import { useRoute } from 'vue-router'
 import { profilesService } from '../services/ProfilesService'
 export default {

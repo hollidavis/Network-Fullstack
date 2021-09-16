@@ -23,7 +23,7 @@
 
 <script>
 import { postsService } from '../services/PostsService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 export default {
   name: 'Thread',
   props: {

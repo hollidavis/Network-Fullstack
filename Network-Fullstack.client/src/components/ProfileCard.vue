@@ -6,25 +6,25 @@
         <div>
           <img class="round-border md-profile" :src="activeProfile.picture" alt="">
         </div>
-        <div class="ml-3 w-100">
+        <div class="ms-3 w-100">
           <p class="lead m-0" v-if="activeProfile.class">
             {{ activeProfile.class }}
           </p>
           <h4 class="card-title">
             {{ activeProfile.name }}
-            <span class="ml-2 fa fa-user-graduate" aria-hidden="true" v-if="activeProfile.graduated == true"></span>
-            <span class="ml-2 fa fa-user" aria-hidden="true" v-else></span>
+            <span class="ms-2 fa fa-user-graduate" aria-hidden="true" v-if="activeProfile.graduated == true"></span>
+            <span class="ms-2 fa fa-user" aria-hidden="true" v-else></span>
           </h4>
           <!-- social links -->
           <div class="d-flex">
             <p v-if="activeProfile.github" class="lead cursor" :href="activeProfile.github">
-              <span class="mr-4 fab fa-lg fa-github"></span>
+              <span class="me-4 fab fa-lg fa-github"></span>
             </p>
             <p v-if="activeProfile.linkedin" class="lead cursor" :href="activeProfile.linkedin">
-              <span class="mr-4 fab fa-lg fa-linkedin"></span>
+              <span class="me-4 fab fa-lg fa-linkedin"></span>
             </p>
             <p v-if="activeProfile.resume" class="lead cursor" :href="activeProfile.resume">
-              <span class="mr-4 fa fa-lg fa-file-alt"></span>
+              <span class="me-4 fa fa-lg fa-file-alt"></span>
             </p>
           </div>
           <p class="card-text" v-if="!activeProfile.bio">
@@ -91,7 +91,7 @@
                 <input type="checkbox"
                        name="graduated"
                        v-model="state.newAccount.graduated"
-                       class="ml-2"
+                       class="ms-2"
                 >
               </div>
             </div>
@@ -180,7 +180,7 @@
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 import $ from 'jquery'
 export default {
   setup() {

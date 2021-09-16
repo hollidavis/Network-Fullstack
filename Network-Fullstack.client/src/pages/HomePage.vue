@@ -13,7 +13,7 @@
 import { computed, onMounted } from '@vue/runtime-core'
 import { postsService } from '../services/PostsService'
 import { AppState } from '../AppState'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 export default {
   name: 'Home',
   setup() {
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.pl-15{
+.ps-15{
   padding-left: 15px;
 }
 </style>

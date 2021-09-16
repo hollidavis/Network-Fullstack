@@ -23,15 +23,7 @@
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <form class="form-inline my-2 my-lg-0" @submit.prevent="searchPosts">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model="state.keyword">
-          <button class="btn btn-outline-secondary my-2 my-sm-0 " type="submit">
-            <span class="fa fa-search mr-1"></span> Search
-          </button>
-        </form>
-      </ul>
-      <span class="navbar-text">
+      <span class="navbar-text ms-auto">
         <button
           class="btn btn-outline-dark text-uppercase"
           @click="login"
@@ -76,7 +68,7 @@ import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
 import { postsService } from '../services/PostsService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 import { router } from '../router'
 export default {
   setup() {

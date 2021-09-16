@@ -22,13 +22,13 @@
       <!-- Links -->
       <div class="col mt-3 d-flex flex-column mx-3 text-dark">
         <p v-if="account.github" class="lead cursor" :href="account.github">
-          <span class="mr-2 fab fa-lg fa-github"></span><b> GitHub</b>
+          <span class="me-2 fab fa-lg fa-github"></span><b> GitHub</b>
         </p>
         <p v-if="account.linkedin" class="lead cursor" :href="account.linkedin">
-          <span class="mr-2 fab fa-lg fa-linkedin"></span><b> LinkedIn</b>
+          <span class="me-2 fab fa-lg fa-linkedin"></span><b> LinkedIn</b>
         </p>
         <p v-if="account.resume" class="lead cursor" :href="account.resume">
-          <span class="mr-3 fa fa-lg fa-file-alt"></span><b>Resume</b>
+          <span class="me-3 fa fa-lg fa-file-alt"></span><b>Resume</b>
         </p>
       </div>
     </div>
@@ -39,7 +39,7 @@
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { profilesService } from '../services/ProfilesService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 import { router } from '../router'
 export default {
   name: 'Login',

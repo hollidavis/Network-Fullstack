@@ -10,7 +10,7 @@
 import { computed, onMounted, onUpdated } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
-import Pop from '../utils/Notifier'
+import Pop from '../utils/Pop'
 export default {
   name: 'Search',
   setup() {

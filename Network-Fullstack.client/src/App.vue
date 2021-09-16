@@ -10,13 +10,9 @@
         </div>
       </div>
       <div class="row justify-content-around side-bar-scroll mt-3">
-        <div class="col-md-8 mx-3">
+        <div class="col-md-12 mx-3">
           <!-- Current page goes here -->
           <router-view />
-        </div>
-        <div class="col-md-3 d-flex flex-column">
-          <Ad />
-          <!-- ads will go here -->
         </div>
       </div>
     </div>
