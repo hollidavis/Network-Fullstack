@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import Pop from '../utils/Notifier'
 import { api } from './AxiosService'
 
 class AccountService {
@@ -9,6 +10,15 @@ class AccountService {
       AppState.account = res.data
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
+    }
+  }
+
+  async editAccount(newAccount) {
+    try {
+      await api.put('/account', newAccount)
+      await this.getAccount()
+    } catch (error) {
+      Pop.toast(error, 'error')
     }
   }
 }

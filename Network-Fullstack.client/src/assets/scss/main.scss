@@ -1,16 +1,59 @@
 @import "./_variables.scss";
 @import "bootstrap";
+@import "./_transitions.scss";
+@import "./_utilities.scss";
 @import "./_overrides.scss";
-@import "./utilities.scss";
-@import "./loaders.scss";
+
+:root {
+  --grey: #f6f6f6;
+  overflow-wrap: break-word;
+}
 
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: $body-bg;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 main {
   flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.side-bar-scroll{
+  overflow-y: auto;
+  height: 85vh;
+}
+
+.round-border{
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.sm-profile{
+width: 75px;
+height: 75px;
+object-fit: cover;
+object-position: center;
+}
+
+.md-profile{
+width: 125px;
+height: 125px;
+object-fit: cover;
+object-position: center;
+}
+
+@media only screen and (max-width: 768px){
+  .hidden-mobile{
+  display: none;
+  }
+}
+
+.cursor{
+  cursor: pointer;
 }

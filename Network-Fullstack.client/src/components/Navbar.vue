@@ -1,12 +1,14 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex align-items-center">
         <img
           alt="logo"
-          src="../assets/img/cw-logo.png"
+          src="../assets/img/n-logo.png"
           height="45"
-        />
+        /><p class="m-0 text-secondary">
+          ETWORK
+        </p>
       </div>
     </router-link>
     <button
@@ -21,16 +23,17 @@
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
-        </li>
+      <ul class="navbar-nav mr-auto">
+        <form class="form-inline my-2 my-lg-0" @submit.prevent="searchPosts">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model="state.keyword">
+          <button class="btn btn-outline-secondary my-2 my-sm-0 " type="submit">
+            <span class="fa fa-search mr-1"></span> Search
+          </button>
+        </form>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn selectable text-success lighten-30 text-uppercase"
+          class="btn btn-outline-dark text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -46,20 +49,15 @@
               :src="user.picture"
               alt="user photo"
               height="40"
-              class="rounded"
+              class="round"
             />
-            <span class="mx-3">{{ user.name }}</span>
+            <span class="mx-3 text-dark">{{ user.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
@@ -77,14 +75,28 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+import { postsService } from '../services/PostsService'
+import Pop from '../utils/Notifier'
+import { router } from '../router'
 export default {
   setup() {
     const state = reactive({
-      dropOpen: false
+      dropOpen: false,
+      keyword: ''
     })
     return {
       state,
       user: computed(() => AppState.user),
+      keyword: computed(() => AppState.keyword),
+      async searchPosts() {
+        try {
+          AppState.keyword = state.keyword
+          await postsService.searchPosts({ search: state.keyword })
+          router.push('search')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
       async login() {
         AuthService.loginWithPopup()
       },
@@ -115,9 +127,10 @@ a:hover {
 .nav-link{
   text-transform: uppercase;
 }
-.navbar-nav .router-link-exact-active{
-  border-bottom: 2px solid var(--bs-success);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.nav-item .nav-link.router-link-exact-active{
+  color: var(--primary);
+}
+.round{
+  border-radius: 50%;
 }
 </style>

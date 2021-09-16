@@ -1,15 +1,26 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+  <main class="row">
+    <div class="col-md-3 shadow bg-light hidden-mobile">
+      <Login v-if="user.isAuthenticated" />
     </div>
-  </footer>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-12 shadow p-0">
+          <Navbar />
+        </div>
+      </div>
+      <div class="row justify-content-around side-bar-scroll mt-3">
+        <div class="col-md-8 mx-3">
+          <!-- Current page goes here -->
+          <router-view />
+        </div>
+        <div class="col-md-3 d-flex flex-column">
+          <Ad />
+          <!-- ads will go here -->
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -19,6 +30,7 @@ export default {
   name: 'App',
   setup() {
     return {
+      user: computed(() => AppState.user),
       appState: computed(() => AppState)
     }
   }
