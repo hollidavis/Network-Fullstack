@@ -17,13 +17,13 @@
           </h4>
           <!-- social links -->
           <div class="d-flex">
-            <p v-if="activeProfile.github" class="lead cursor" :href="activeProfile.github">
+            <p v-if="activeProfile.github" class="lead pointer" :href="activeProfile.github">
               <span class="me-4 fab fa-lg fa-github"></span>
             </p>
-            <p v-if="activeProfile.linkedin" class="lead cursor" :href="activeProfile.linkedin">
+            <p v-if="activeProfile.linkedin" class="lead pointer" :href="activeProfile.linkedin">
               <span class="me-4 fab fa-lg fa-linkedin"></span>
             </p>
-            <p v-if="activeProfile.resume" class="lead cursor" :href="activeProfile.resume">
+            <p v-if="activeProfile.resume" class="lead pointer" :href="activeProfile.resume">
               <span class="me-4 fa fa-lg fa-file-alt"></span>
             </p>
           </div>

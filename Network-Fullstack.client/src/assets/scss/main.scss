@@ -14,7 +14,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: $body-bg;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -54,6 +54,6 @@ object-position: center;
   }
 }
 
-.cursor{
+.pointer{
   cursor: pointer;
 }

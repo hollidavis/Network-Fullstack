@@ -10,7 +10,7 @@
     <!-- Creator Info -->
     <div class="row">
       <!-- Profile Picture -->
-      <div class="ms-3 cursor" @click.stop="getProfileById">
+      <div class="ms-3 pointer" @click.stop="getProfileById">
         <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
       </div>
       <!-- Name, Created At, Graduated -->
@@ -39,7 +39,7 @@
     <!-- Likes -->
     <div class="row justify-content-end mb-3">
       <div class="col-1 d-flex flex-row justify-content-around align-items-center">
-        <i class="far fa-lg fa-heart cursor" @click.stop="likePost"></i>
+        <i class="far fa-lg fa-heart pointer" @click.stop="likePost"></i>
         <p class="m-0">
           {{ state.likes }}
         </p>

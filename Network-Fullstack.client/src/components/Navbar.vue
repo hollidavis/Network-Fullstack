@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex align-items-center">
         <img
@@ -111,7 +111,7 @@ export default {
   transform: scale(1);
 }
 .hoverable {
-  cursor: pointer;
+  pointer: pointer;
 }
 a:hover {
   text-decoration: none;
