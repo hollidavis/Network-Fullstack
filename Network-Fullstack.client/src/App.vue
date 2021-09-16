@@ -10,8 +10,8 @@
             <Navbar />
           </div>
         </div>
-        <div class="row justify-content-around side-bar-scroll">
-          <div class="col-md-12 mx-3">
+        <div class="row justify-content-around side-bar-scroll h-100">
+          <div class="col-md-12">
             <!-- Current page goes here -->
             <router-view />
           </div>
