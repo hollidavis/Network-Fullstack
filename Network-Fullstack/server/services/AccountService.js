@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { BadRequest, Forbidden } from '../utils/Errors'
 
 // Private Methods
 
@@ -102,6 +103,26 @@ class AccountService {
       { runValidators: true, setDefaultsOnInsert: true, new: true }
     )
     return account
+  }
+
+  async getProfileById(id) {
+    const profile = await dbContext.Account.findById(id)
+    if (!profile) {
+      throw new BadRequest('Invalid Id')
+    }
+    return profile
+  }
+
+  async editProfile(body) {
+    const account = await dbContext.Account.findById(body.accountId)
+    if (!account) {
+      throw new BadRequest('Invalid Id')
+    }
+    if (body.accountId !== account.id) {
+      throw new Forbidden('This is not your account')
+    }
+    const editedAccount = await dbContext.Account.findByIdAndUpdate(body.accountId, body, { new: true })
+    return editedAccount
   }
 }
 export const accountService = new AccountService()

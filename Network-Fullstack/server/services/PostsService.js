@@ -2,10 +2,35 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class PostsService {
-  async getAll() {
-    const posts = await dbContext.Posts.find().populate('creator', 'name picture')
-    return posts
+  async find(query = {}, page = 1, searchTerm = '') {
+    const q = { ...query, body: { $regex: new RegExp(searchTerm, 'ig') } }
+    const total = await dbContext.Posts.countDocuments(q)
+    const limit = 20
+    const pages = Math.ceil(total / limit)
+    if (total === 0) {
+      return { page: '0 of 0', newer: null, older: null, posts: [] }
+    }
+    if (page > pages) {
+      throw new BadRequest('Invalid Page Number')
+    }
+    const posts = await dbContext.Posts.find(q)
+      .populate('creator', 'name picture')
+      .populate('likes', 'name picture')
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+    return {
+      page: `${page} of ${pages}`,
+      newer: page > 1 ? `https://the-net-work.herokuapp.com/api/posts?page=${page - 1}` : null,
+      older: page < pages ? `https://the-net-work.herokuapp.com/api/posts?page=${page + 1}` : null,
+      posts
+    }
   }
+
+  // async getAll() {
+  //   const posts = await dbContext.Posts.find().populate('creator', 'name picture')
+  //   return posts
+  // }
 
   async getById(id) {
     const post = await dbContext.Posts.findById(id).populate('creator', 'name picture')

@@ -18,4 +18,23 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
+
+  async getProfileById(req, res, next) {
+    try {
+      const profile = await accountService.getProfileById(req.params.id)
+      res.send(profile)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editProfile(req, res, next) {
+    try {
+      req.body.accountId = req.userInfo.id
+      const account = await accountService.editProfile(req.body)
+      res.send(account)
+    } catch (error) {
+      next(error)
+    }
+  }
 }

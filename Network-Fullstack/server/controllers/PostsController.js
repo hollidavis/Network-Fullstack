@@ -16,12 +16,23 @@ export class PostsController extends BaseController {
 
   async getAll(req, res, next) {
     try {
-      const posts = await postsService.getAll()
-      res.send(posts)
-    } catch (error) {
-      next(error)
-    }
+      const page = Math.abs(Math.floor(req.query.page)) || 1
+      const searchTerm = req.query.query || ''
+      delete req.query.page
+      delete req.query.query
+      const data = await postsService.find(req.query, page, searchTerm)
+      res.send(data)
+    } catch (error) { next(error) }
   }
+
+  // async getAll(req, res, next) {
+  //   try {
+  //     const posts = await postsService.getAll()
+  //     res.send(posts)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async getById(req, res, next) {
     try {
