@@ -1,21 +1,14 @@
 <template>
   <main class="container-fluid">
-    <div class="row">
+    <div class="row flex-grow-1">
       <div class="col-md-3 shadow bg-light hidden-mobile">
         <Login v-if="user.isAuthenticated" />
       </div>
       <div class="col-md-9">
         <div class="row bg-primary">
-          <div class="col-12 shadow">
-            <Navbar />
-          </div>
+          <Navbar />
         </div>
-        <div class="row justify-content-around side-bar-scroll h-100">
-          <div class="col-md-12">
-            <!-- Current page goes here -->
-            <router-view />
-          </div>
-        </div>
+        <router-view />
       </div>
     </div>
   </main>

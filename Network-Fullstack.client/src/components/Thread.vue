@@ -25,7 +25,6 @@
 import { postsService } from '../services/PostsService'
 import Pop from '../utils/Pop'
 export default {
-  name: 'Thread',
   props: {
     posts: {
       type: Object,

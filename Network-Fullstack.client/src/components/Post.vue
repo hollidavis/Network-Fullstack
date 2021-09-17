@@ -56,7 +56,6 @@ import Pop from '../utils/Pop'
 import { profilesService } from '../services/ProfilesService'
 import { router } from '../router'
 export default {
-  name: 'Post',
   props: {
     post: {
       type: Object,

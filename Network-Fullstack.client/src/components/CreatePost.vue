@@ -42,7 +42,6 @@ import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
 import Pop from '../utils/Pop'
 export default {
-  name: 'CreatePost',
   setup() {
     const state = reactive({
       newPost: {}
