@@ -4,7 +4,7 @@
       <img class="card-img-top banner" :src="activeProfile.coverImg" alt="cover image" v-if="activeProfile.coverImg">
       <div class="card-body d-flex">
         <div>
-          <img class="round-border md-profile" :src="activeProfile.picture" alt="">
+          <img class="rounded-pill md-profile" :src="activeProfile.picture" alt="">
         </div>
         <div class="ms-3 w-100">
           <p class="lead m-0" v-if="activeProfile.class">
