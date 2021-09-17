@@ -52,6 +52,9 @@
       "titleBar.inactiveBackground": "#7b340299",
       "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#7b3402"
+    "peacock.color": "#7b3402",
+    "cSpell.words": [
+      "virtuals"
+    ]
   }
 }
