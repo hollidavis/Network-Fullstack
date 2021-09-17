@@ -134,27 +134,34 @@
 </template>
 
 <script>
-import { reactive } from '@vue/reactivity'
+import { reactive, ref } from '@vue/reactivity'
 import { accountService } from '../services/AccountService'
 import Pop from '../utils/Pop'
 import { Modal } from 'bootstrap'
-import { onMounted } from '@vue/runtime-core'
+import { onMounted, watchEffect } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
   setup() {
     const state = reactive({
       newAccount: {}
     })
-    let modal = null
+    const modal = ref()
+    let bootstrapModal = null
     onMounted(() => {
-      modal = new Modal(document.getElementById('editProfileModal'))
+      bootstrapModal = new Modal(modal.value)
     })
+
+    watchEffect(() => {
+      state.newAccount = { ...AppState.account }
+    })
+
     return {
       state,
+      modal,
       async editAccount() {
         try {
           await accountService.editAccount(state.newAccount)
-          state.newAccount = {}
-          modal.hide()
+          bootstrapModal.hide()
           Pop.toast('Updated!', 'success')
         } catch (error) {
           Pop.toast(error, 'error')
