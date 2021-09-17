@@ -113,7 +113,7 @@ class AccountService {
     return profile
   }
 
-  async editProfile(body) {
+  async editAccount(body) {
     const account = await dbContext.Account.findById(body.accountId)
     if (!account) {
       throw new BadRequest('Invalid Id')
@@ -123,6 +123,14 @@ class AccountService {
     }
     const editedAccount = await dbContext.Account.findByIdAndUpdate(body.accountId, body, { new: true })
     return editedAccount
+  }
+
+  async getPostsByProfileId(id) {
+    const posts = await dbContext.Posts.find(p => p.creatorId === id)
+    if (!posts) {
+      throw new BadRequest('Invalid Id')
+    }
+    return posts
   }
 }
 export const accountService = new AccountService()

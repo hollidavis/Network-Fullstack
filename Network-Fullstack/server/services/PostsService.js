@@ -27,11 +27,6 @@ class PostsService {
     }
   }
 
-  // async getAll() {
-  //   const posts = await dbContext.Posts.find().populate('creator', 'name picture')
-  //   return posts
-  // }
-
   async getById(id) {
     const post = await dbContext.Posts.findById(id).populate('creator', 'name picture')
     if (!post) {
@@ -43,6 +38,17 @@ class PostsService {
   async create(body) {
     const post = await dbContext.Posts.create(body)
     return await dbContext.Posts.findById(post._id).populate('creator', 'name picture')
+  }
+
+  async like(postId, userId) {
+    const post = await dbContext.Posts.findById(postId)
+    if (!post) {
+      throw new BadRequest('Invalid Id')
+    }
+    post.likeIds.push(userId)
+    const updated = await dbContext.Posts.findByIdAndUpdate(postId, post, { new: true }
+    )
+    return updated
   }
 
   async edit(id, body) {

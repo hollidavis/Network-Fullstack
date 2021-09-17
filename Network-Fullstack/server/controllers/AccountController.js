@@ -8,6 +8,7 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
+      .put('', this.editAccount)
   }
 
   async getUserAccount(req, res, next) {
@@ -19,19 +20,10 @@ export class AccountController extends BaseController {
     }
   }
 
-  async getProfileById(req, res, next) {
-    try {
-      const profile = await accountService.getProfileById(req.params.id)
-      res.send(profile)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async editProfile(req, res, next) {
+  async editAccount(req, res, next) {
     try {
       req.body.accountId = req.userInfo.id
-      const account = await accountService.editProfile(req.body)
+      const account = await accountService.editAccount(req.body)
       res.send(account)
     } catch (error) {
       next(error)

@@ -7,9 +7,12 @@ export class PostsController extends BaseController {
     super('api/posts')
     this.router
       .get('', this.getAll)
+      .get('?query=', this.getAll)
+      .get('?page=', this.getAll)
       .get('/:id', this.getById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
+      .post('/:id/like', this.like)
       .put('/:id', this.edit)
       .delete('/:id', this.destroy)
   }
@@ -25,15 +28,6 @@ export class PostsController extends BaseController {
     } catch (error) { next(error) }
   }
 
-  // async getAll(req, res, next) {
-  //   try {
-  //     const posts = await postsService.getAll()
-  //     res.send(posts)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
-
   async getById(req, res, next) {
     try {
       const post = await postsService.getById(req.params.id)
@@ -47,6 +41,15 @@ export class PostsController extends BaseController {
     try {
       req.body.creatorId = req.userInfo.id
       const post = await postsService.create(req.body)
+      res.send(post)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async like(req, res, next) {
+    try {
+      const post = await postsService.like(req.params.id, req.userInfo.id)
       res.send(post)
     } catch (error) {
       next(error)
