@@ -105,6 +105,11 @@ class AccountService {
     return account
   }
 
+  async getAllProfiles() {
+    const profiles = await dbContext.Account.find()
+    return profiles
+  }
+
   async getProfileById(id) {
     const profile = await dbContext.Account.findById(id)
     if (!profile) {

@@ -1,9 +1,8 @@
 import { AppState } from '../AppState'
-import { convertToQuery } from '../utils/Query'
 import { api } from './AxiosService'
 class ProfilesService {
-  async getAllProfiles(query = {}) {
-    const res = await api.get('api/profiles' + convertToQuery(query))
+  async getAllProfiles() {
+    const res = await api.get('api/profiles')
     AppState.profiles = res.data
   }
 

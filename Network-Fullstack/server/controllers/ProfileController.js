@@ -4,11 +4,21 @@ import BaseController from '../utils/BaseController'
 
 export class ProfileController extends BaseController {
   constructor() {
-    super('profiles')
+    super('api/profiles')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('', this.getAllProfiles)
       .get('/:id', this.getProfileById)
       .get('/:id/posts', this.getProfileById)
+  }
+
+  async getAllProfiles(req, res, next) {
+    try {
+      const profiles = await accountService.getAllProfiles()
+      res.send(profiles)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getProfileById(req, res, next) {
