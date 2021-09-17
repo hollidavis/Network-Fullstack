@@ -7,10 +7,10 @@ class PostsService {
     AppState.posts = res.data
   }
 
-  async searchPosts() {
-    const keyword = AppState.keyword
-    const res = await api.get('api/posts/?search=' + keyword)
-    AppState.searchPosts = res.data
+  async getPostsByProfileId(id) {
+    const res = await api.get('api/profiles/' + id + '/posts')
+    console.log(res.data)
+    AppState.posts = res.data
   }
 
   async getOlder(older) {

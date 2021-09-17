@@ -11,7 +11,6 @@ import { postsService } from '../services/PostsService'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 export default {
-  name: 'Home',
   setup() {
     onMounted(async() => {
       try {

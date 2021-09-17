@@ -1,15 +1,14 @@
-import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { postsService } from '../services/PostsService'
 import BaseController from '../utils/BaseController'
 
 export class ProfileController extends BaseController {
   constructor() {
     super('api/profiles')
     this.router
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAllProfiles)
       .get('/:id', this.getProfileById)
-      .get('/:id/posts', this.getProfileById)
+      .get('/:id/posts', this.getPostsByProfileId)
   }
 
   async getAllProfiles(req, res, next) {
@@ -32,8 +31,8 @@ export class ProfileController extends BaseController {
 
   async getPostsByProfileId(req, res, next) {
     try {
-      const profile = await accountService.getPostsByProfileId(req.params.id)
-      res.send(profile)
+      const posts = await postsService.find({ creatorId: req.params.id })
+      res.send(posts)
     } catch (error) {
       next(error)
     }

@@ -1,19 +1,12 @@
 <template>
   <div class="col-12">
     <div class="bg-light rounded shadow m-3 p-3">
-      <div class="row justify-content-end">
-        <div class="col-1" await v-if="post.creator.id == account.id">
-          <button type="button" class="btn btn-sm btn-outline-danger" @click="deletePost">
-            <span class="fa fa-times"></span>
-          </button>
-        </div>
-      </div>
       <!-- Creator Info -->
       <div class="row">
         <div class="col-md-12 d-flex align-items-center">
           <!-- Profile Picture -->
-          <div class="mx-3 pointer" @click.stop="getProfileById">
-            <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
+          <div class="me-3 pointer" @click.stop="getProfileById">
+            <img class="rounded-pill sm-profile" :src="post.creator.picture" :alt="post.creator.name">
           </div>
           <!-- Name, Created At, Graduated -->
           <div class="d-flex">
@@ -24,6 +17,12 @@
             <h3 class="m-0 lead">
               <b>{{ post.creator.name }}</b>
             </h3>
+          </div>
+          <!-- Delete -->
+          <div class="ms-auto" await v-if="post.creator.id == account.id">
+            <button type="button" class="btn btn-sm text-danger p-0 ms-2" @click="deletePost">
+              <span class="fa fa-times"></span>
+            </button>
           </div>
         </div>
       </div>
@@ -41,7 +40,7 @@
         <div class="col-1 d-flex flex-row justify-content-around align-items-center">
           <i class="far fa-lg fa-heart pointer" @click.stop="likePost"></i>
           <p class="m-0">
-            {{ state.likes }}
+            {{ post.likeIds.length }}
           </p>
         </div>
       </div>
@@ -50,7 +49,7 @@
 </template>
 
 <script>
-import { computed, reactive, watchEffect } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
 import Pop from '../utils/Pop'
@@ -65,16 +64,7 @@ export default {
   },
   setup(props) {
     const state = reactive({
-      newPost: {},
-      time: '',
-      likes: 0
-    })
-    watchEffect(() => {
-      let count = 0
-      props.post.likeIds.forEach(like => {
-        count++
-      })
-      state.likes = count
+      newPost: {}
     })
     return {
       state,
