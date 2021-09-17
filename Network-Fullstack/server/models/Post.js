@@ -7,7 +7,7 @@ export const PostSchema = new Schema(
     body: { type: String, required: true },
     imgUrl: { type: String },
     creatorId: { type: ObjectId, ref: 'Account', required: true },
-    likeIds: [{ type: ObjectId, ref: 'Account' }]
+    likeIds: [{ type: String, ref: 'Account' }]
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

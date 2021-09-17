@@ -42,13 +42,14 @@ class PostsService {
 
   async like(postId, userId) {
     const post = await dbContext.Posts.findById(postId)
-    if (!post) {
-      throw new BadRequest('Invalid Id')
+    const liked = post.likeIds.find(id => id === userId)
+    if (!liked) {
+      post.likeIds.push(userId)
+    } else {
+      post.likeIds = post.likeIds.filter(id => id !== userId)
     }
-    post.likeIds.push(userId)
-    const updated = await dbContext.Posts.findByIdAndUpdate(postId, post, { new: true }
-    )
-    return updated
+    await post.save()
+    return post
   }
 
   async edit(id, body) {

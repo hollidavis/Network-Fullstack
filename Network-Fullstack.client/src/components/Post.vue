@@ -10,19 +10,21 @@
       </div>
       <!-- Creator Info -->
       <div class="row">
-        <!-- Profile Picture -->
-        <div class="ms-3 pointer" @click.stop="getProfileById">
-          <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
-        </div>
-        <!-- Name, Created At, Graduated -->
-        <div class="d-flex">
-          <div>
-            <span class="me-2 fa fa-user-graduate" aria-hidden="true" v-if="post.creator.graduated == true"></span>
-            <span class="me-2 fa fa-user" aria-hidden="true" v-else></span>
+        <div class="col-md-12 d-flex align-items-center">
+          <!-- Profile Picture -->
+          <div class="mx-3 pointer" @click.stop="getProfileById">
+            <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
           </div>
-          <p class="m-0">
-            <b>{{ post.creator.name }}</b>
-          </p>
+          <!-- Name, Created At, Graduated -->
+          <div class="d-flex">
+            <div>
+              <span class="me-2 fa fa-user-graduate" aria-hidden="true" v-if="post.creator.graduated == true"></span>
+              <span class="me-2 fa fa-user" aria-hidden="true" v-else></span>
+            </div>
+            <h3 class="m-0 lead">
+              <b>{{ post.creator.name }}</b>
+            </h3>
+          </div>
         </div>
       </div>
       <!-- Body/Img -->
@@ -35,7 +37,7 @@
         </div>
       </div>
       <!-- Likes -->
-      <div class="row justify-content-end mb-3">
+      <div class="row justify-content-end">
         <div class="col-1 d-flex flex-row justify-content-around align-items-center">
           <i class="far fa-lg fa-heart pointer" @click.stop="likePost"></i>
           <p class="m-0">
@@ -48,7 +50,7 @@
 </template>
 
 <script>
-import { computed, onMounted, onUpdated, reactive } from '@vue/runtime-core'
+import { computed, reactive, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
 import Pop from '../utils/Pop'
@@ -67,20 +69,9 @@ export default {
       time: '',
       likes: 0
     })
-    onMounted(() => {
-      const old = new Date(props.post.createdAt)
-      state.time = old.toUTCString()
-    })
-    onUpdated(() => {
+    watchEffect(() => {
       let count = 0
-      props.post.likes.forEach(like => {
-        count++
-      })
-      state.likes = count
-    })
-    onMounted(() => {
-      let count = 0
-      props.post.likes.forEach(like => {
+      props.post.likeIds.forEach(like => {
         count++
       })
       state.likes = count
