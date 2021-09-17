@@ -1,8 +1,6 @@
 <template>
-  <div class="home row">
-    <div class="col-12 bg-light rounded shadow">
-      <CreatePost :posts="posts" v-if="user.isAuthenticated" />
-    </div>
+  <div class="row justify-content-center">
+    <CreatePost :posts="posts" v-if="user.isAuthenticated" />
     <div class="col-12">
       <Thread :posts="posts" />
     </div>
