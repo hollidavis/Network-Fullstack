@@ -1,48 +1,47 @@
 <template>
-  <div class="post col-12 bg-light rounded shadow my-3 pt-3">
-    <div class="row justify-content-end">
-      <div class="col-1" await v-if="post.creator.id == account.id">
-        <button type="button" class="btn btn-sm btn-outline-danger" @click="deletePost">
-          <span class="fa fa-times"></span>
-        </button>
+  <div class="col-12">
+    <div class="bg-light rounded shadow m-3 p-3">
+      <div class="row justify-content-end">
+        <div class="col-1" await v-if="post.creator.id == account.id">
+          <button type="button" class="btn btn-sm btn-outline-danger" @click="deletePost">
+            <span class="fa fa-times"></span>
+          </button>
+        </div>
       </div>
-    </div>
-    <!-- Creator Info -->
-    <div class="row">
-      <!-- Profile Picture -->
-      <div class="ms-3 pointer" @click.stop="getProfileById">
-        <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
-      </div>
-      <!-- Name, Created At, Graduated -->
-      <div class="col-9 d-flex justify-content-center flex-column">
-        <p class="m-0">
-          <b>{{ post.creator.name }}</b>
-        </p>
-        <div class="d-flex align-items-center">
+      <!-- Creator Info -->
+      <div class="row">
+        <!-- Profile Picture -->
+        <div class="ms-3 pointer" @click.stop="getProfileById">
+          <img class="round-border sm-profile" :src="post.creator.picture" :alt="post.creator.name">
+        </div>
+        <!-- Name, Created At, Graduated -->
+        <div class="d-flex">
+          <div>
+            <span class="me-2 fa fa-user-graduate" aria-hidden="true" v-if="post.creator.graduated == true"></span>
+            <span class="me-2 fa fa-user" aria-hidden="true" v-else></span>
+          </div>
           <p class="m-0">
-            {{ state.time }}
+            <b>{{ post.creator.name }}</b>
           </p>
-          <span class="ms-2 fa fa-user-graduate" aria-hidden="true" v-if="post.creator.graduated == true"></span>
-          <span class="ms-2 fa fa-user" aria-hidden="true" v-else></span>
         </div>
       </div>
-    </div>
-    <!-- Body/Img -->
-    <div class="row m-2">
-      <div class="col-12">
-        <p>{{ post.body }}</p>
-        <div v-if="post.imgUrl">
-          <img :src="post.imgUrl" class="post-img">
+      <!-- Body/Img -->
+      <div class="row m-2">
+        <div class="col-12">
+          <p>{{ post.body }}</p>
+          <div v-if="post.imgUrl">
+            <img :src="post.imgUrl" class="post-img">
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Likes -->
-    <div class="row justify-content-end mb-3">
-      <div class="col-1 d-flex flex-row justify-content-around align-items-center">
-        <i class="far fa-lg fa-heart pointer" @click.stop="likePost"></i>
-        <p class="m-0">
-          {{ state.likes }}
-        </p>
+      <!-- Likes -->
+      <div class="row justify-content-end mb-3">
+        <div class="col-1 d-flex flex-row justify-content-around align-items-center">
+          <i class="far fa-lg fa-heart pointer" @click.stop="likePost"></i>
+          <p class="m-0">
+            {{ state.likes }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

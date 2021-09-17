@@ -1,9 +1,7 @@
 <template>
   <div class="row justify-content-center">
     <CreatePost :posts="posts" v-if="user.isAuthenticated" />
-    <div class="col-12">
-      <Thread :posts="posts" />
-    </div>
+    <Thread :posts="posts" />
   </div>
 </template>
 

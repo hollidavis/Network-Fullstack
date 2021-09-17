@@ -52,8 +52,8 @@ export default {
       async createPost() {
         try {
           await postsService.createPost(state.newPost)
-          Pop.toast('Posted!', 'success')
           state.newPost = {}
+          Pop.toast('Posted!', 'success')
         } catch (error) {
           Pop.toast(error, 'error')
         }

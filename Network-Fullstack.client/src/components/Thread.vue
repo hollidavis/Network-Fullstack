@@ -1,22 +1,24 @@
 <template>
-  <div class="row">
-    <Post v-for="p in posts.posts" :key="p.id" :post="p" />
-  </div>
-  <div class="row justify-content-between align-items-center">
-    <div class="col-2">
-      <button type="button" class="btn btn-outline-primary" v-if="posts.newer" @click.stop="getNewer">
-        Newer
-      </button>
+  <div class="col-md-12">
+    <div class="row">
+      <Post v-for="p in posts.posts" :key="p.id" :post="p" />
     </div>
-    <div class="col-2 d-flex justify-content-center">
-      <p class="m-0">
-        {{ posts.page }}
-      </p>
-    </div>
-    <div class="col-2 d-flex justify-content-end">
-      <button type="button" class="btn btn-outline-primary" v-if="posts.older" @click.stop="getOlder">
-        Older
-      </button>
+    <div class="row justify-content-between align-items-center">
+      <div class="col-2">
+        <button type="button" class="btn btn-outline-primary" v-if="posts.newer" @click.stop="getNewer">
+          Newer
+        </button>
+      </div>
+      <div class="col-2 d-flex justify-content-center">
+        <p class="m-0">
+          {{ posts.page }}
+        </p>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary" v-if="posts.older" @click.stop="getOlder">
+          Older
+        </button>
+      </div>
     </div>
   </div>
 </template>
