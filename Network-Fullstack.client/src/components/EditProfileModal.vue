@@ -5,14 +5,15 @@
        role="dialog"
        aria-labelledby="modelTitleId"
        aria-hidden="true"
+       ref="modal"
   >
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content bg-light">
         <div class="modal-header">
           <h5 class="modal-title">
             Edit Profile
           </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -24,7 +25,7 @@
                      name="name"
                      v-model="state.newAccount.name"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="Name..."
                      required
               >
@@ -37,7 +38,7 @@
                        name="class"
                        v-model="state.newAccount.class"
                        class="
-                     form-control"
+                     form-control bg-white mb-2"
                        placeholder="Class..."
                 >
               </div>
@@ -57,7 +58,7 @@
                      name="picture"
                      v-model="state.newAccount.picture"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="Profile Picture..."
               >
             </div>
@@ -67,7 +68,7 @@
                 name="bio"
                 rows="4"
                 cols="50"
-                class="form-control"
+                class="form-control bg-white mb-2"
                 placeholder="Bio..."
                 v-model="state.newAccount.bio"
               ></textarea>
@@ -78,7 +79,7 @@
                      name="coverImg"
                      v-model="state.newAccount.coverImg"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="Cover Image..."
               >
             </div>
@@ -88,7 +89,7 @@
                      name="email"
                      v-model="state.newAccount.email"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="Email..."
               >
             </div>
@@ -98,7 +99,7 @@
                      name="github"
                      v-model="state.newAccount.github"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="Github Link..."
               >
             </div>
@@ -108,7 +109,7 @@
                      name="linkedin"
                      v-model="state.newAccount.linkedin"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="LinkedIn Link..."
               >
             </div>
@@ -118,11 +119,11 @@
                      name="resume"
                      v-model="state.newAccount.resume"
                      class="
-                     form-control"
+                     form-control bg-white mb-2"
                      placeholder="Resume Link..."
               >
             </div>
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-primary">
               Save
             </button>
           </form>
@@ -136,11 +137,16 @@
 import { reactive } from '@vue/reactivity'
 import { accountService } from '../services/AccountService'
 import Pop from '../utils/Pop'
-import $ from 'jquery'
+import { Modal } from 'bootstrap'
+import { onMounted } from '@vue/runtime-core'
 export default {
   setup() {
     const state = reactive({
       newAccount: {}
+    })
+    let modal = null
+    onMounted(() => {
+      modal = new Modal(document.getElementById('editProfileModal'))
     })
     return {
       state,
@@ -148,7 +154,7 @@ export default {
         try {
           await accountService.editAccount(state.newAccount)
           state.newAccount = {}
-          $('#editProfileModal').modal('hide')
+          modal.hide()
           Pop.toast('Updated!', 'success')
         } catch (error) {
           Pop.toast(error, 'error')

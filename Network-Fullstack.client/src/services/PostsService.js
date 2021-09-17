@@ -9,7 +9,6 @@ class PostsService {
 
   async getPostsByProfileId(id) {
     const res = await api.get('api/profiles/' + id + '/posts')
-    console.log(res.data)
     AppState.posts = res.data
   }
 

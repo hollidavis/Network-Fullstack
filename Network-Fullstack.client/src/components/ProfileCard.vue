@@ -34,7 +34,7 @@
             <em>{{ activeProfile.bio }}</em>
           </p>
           <div class="w-100 d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" v-if="activeProfile.id === account.id" data-toggle="modal" data-target="#editProfileModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal" v-if="activeProfile.id === account.id">
               <span class="fa fa-edit"></span> Edit
             </button>
           </div>
